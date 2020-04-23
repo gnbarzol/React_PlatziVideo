@@ -1,7 +1,7 @@
 import React from 'react';
 import '../assets/styles/CarrouselItem.scss';
-import play from '../assets/static/play.png';
-import plus from '../assets/static/plus.png';
+import play from '../assets/static/play-icon.png';
+import plus from '../assets/static/plus-icon.png';
 
 const CarrouselItem = (props) => {
   const {title, year, contentRating, duration, cover, description} = props;

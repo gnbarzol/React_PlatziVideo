@@ -55,6 +55,9 @@ module.exports = {
       },
     ],
   },
+  devServer: { //Para permitirme mover en rutas
+    historyApiFallback: true,
+  },
   plugins: [
     new HtmlWebPackPlugin({
       template: './public/index.html',

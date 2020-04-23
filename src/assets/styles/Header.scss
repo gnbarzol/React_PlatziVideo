@@ -1,5 +1,7 @@
+@import './Vars.scss';
+
 .header{
-    background-color: #272343;
+    background-color: $main-color;
     width: 100%;
     height: 80px;
     display: flex;

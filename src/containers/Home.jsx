@@ -1,17 +1,29 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-import Header from './Header';
-import Search from './Search';
-import Categorie from './Categorie';
-import Carrousel from './Carrousel';
-import CarrouselItem from './CarrouselItem';
-import Footer from './Footer';
+import React, { useState, useEffect } from 'react';
+import '../assets/styles/Home.scss';
+import Search from '../components/Search';
+import Categorie from '../components/Categorie';
+import Carrousel from '../components/Carrousel';
+import CarrouselItem from '../components/CarrouselItem';
+import clienteAxios from '../config/axios';
 
-const Container = ({ videos }) => {
+const Home = () => {
+  //Tambien se los puede crear en una carpeta aparte dentro de una funcion y retornando "videos", luego se lo exporta aqui y listo.
+  const [videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    clienteAxios.get('/initalState')
+      .then((response) => {
+        setVideos(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  //Hasta aqui.
 
   return videos.length === 0 ? null : (
-    <div>
-      <Header />
+    <>
       <Search />
       {videos.mylist?.length > 0 && (
         <Categorie title='Mi Lista'>
@@ -38,10 +50,9 @@ const Container = ({ videos }) => {
           ))}
         </Carrousel>
       </Categorie>
-
-      <Footer />
-    </div>
+    </>
   );
+
 };
 
-export default Container;
+export default Home;
