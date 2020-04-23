@@ -1,0 +1,11 @@
+.carrousel {
+    width: 100%;
+    overflow: scroll;
+    padding: 30px;
+    position: relative;
+}
+.carrousel__container {
+    white-space: nowrap; /*Hace que los elementos se posiciones por todo lo largo*/
+    margin: 70px 0px 90px 0px;
+    padding-bottom: 10px;
+}

@@ -1,0 +1,51 @@
+.header{
+    background-color: #272343;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /*box-shadow: 2px 3px 15px 4px rgba(255, 255, 255, 0.3); comienza en x, comienza en y, degradado, difumicacion, color */
+}
+.header__img{
+    width: 200px;
+    margin-left: 25px;
+}
+.header__menu{
+    margin-right: 30px;
+}
+.header__menu ul{
+    display: none;
+    list-style: none; /*Para sacar los puntos del item*/
+    position: absolute;
+    padding: 0px;
+    text-align: right;
+    width: 100px;
+    margin: 0px 0px 0px -14px;
+}
+.header__menu:hover ul, ul:hover{
+    display: block;
+}
+.header__menu li{
+    margin: 10px 0px;
+}
+.header__menu li a{
+    color: #fff;
+    text-decoration: none;
+}
+.header__menu li a:hover{
+    text-decoration: underline;
+}
+.header__menu--profile{
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+}
+.header__menu--profile img{
+    margin-right: 8px;
+    width: 40px;
+}
+.header__menu--profile p{
+    color: #fff;
+    margin: 0;
+}
