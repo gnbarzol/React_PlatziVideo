@@ -56,7 +56,7 @@ const Home = ({ myList, trends, originals }) => {
 
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     myList: state.myList,
     trends: state.trends,
