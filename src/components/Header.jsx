@@ -5,10 +5,16 @@ import gravatar from '../utils/gravatar';
 import '../assets/styles/Header.scss';
 import logo from '../assets/static/logo-platzi-video-BW2.png';
 import iconUser from '../assets/static/user-icon.png';
+import {logoutRequest} from '../actions';
 
 const Header = (props) => {
   const { user } = props;
   const hasUser = Object.keys(user).length > 0;
+
+  const handleLogout = () => {
+    //Seteamos el state actual para simular una salida del usuario
+    props.logoutRequest({})
+  }
   return (
     <header className='header'>
       <Link to='/' >
@@ -28,10 +34,17 @@ const Header = (props) => {
           <p>Perfil</p>
         </div>
         <ul>
-          <li><a href='/'>Cuenta</a></li>
+          { hasUser && <li><a href='/'>{user.name}</a></li>}
+          
+          {hasUser ? (
+            <li><a href='#logout' onClick={handleLogout}>Cerrar Sesión</a></li>
+          ) : (
           <li>
             <Link to='/login'>Iniciar Sesion</Link>
           </li>
+          )
+          
+          }
         </ul>
       </div>
       
@@ -39,10 +52,16 @@ const Header = (props) => {
   );
 };
 
+//Se encarga de traer los props que vamos a usar en el componete
 const mapStateToProps = (state) => {
   return {
     user: state.user,
   };
 };
 
-export default connect(mapStateToProps, null)(Header);
+//Se encarga de traer los actions que se pueden disparar en este componente
+const mapDispatchToProps = {
+  logoutRequest,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
