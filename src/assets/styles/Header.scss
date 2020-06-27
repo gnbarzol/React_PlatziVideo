@@ -46,6 +46,8 @@
 .header__menu--profile img{
     margin-right: 8px;
     width: 40px;
+    border-radius: 100%; //Para hacer la imagen de perfin redonda 
+    object-fit: cover; //Para que la imagen se ajuste al circulo y no se mueva mas para un lado u el otro
 }
 .header__menu--profile p{
     color: #fff;

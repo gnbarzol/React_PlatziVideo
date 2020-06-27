@@ -9,6 +9,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
+    // para cuando quiera entrar a un video poniedo el path directo, este pueda cargar
+    publicPath: '/',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
