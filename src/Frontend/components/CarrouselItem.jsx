@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { setFavorite, deleteFavorite } from '../actions';
 import '../assets/styles/CarrouselItem.scss';
 import play from '../assets/static/play-icon.png';
@@ -24,7 +25,9 @@ const CarrouselItem = (props) => {
       <img className='carrousel-items__img' src={cover} alt={title} />
       <div className='carrousel-items__details'>
         <div>
-          <img src={play} alt='icon play' />
+          <Link to={`/player/${id}`}>
+            <img src={play} alt='icon play' />
+          </Link>
           { (isList) ?
             <img src={removeIcon} alt='icon remove' onClick={() => handleDeleteFavorite(id)} /> :
             <img src={plus} alt='icon plus' onClick={handleSetFavorite} />

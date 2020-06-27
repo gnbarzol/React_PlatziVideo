@@ -25,7 +25,7 @@ const Home = ({ myList, trends, originals }) => {
 
   return (
     <>
-      <Search />
+      <Search isHome />
       {myList?.length > 0 && (
         <Categorie title='Mi Lista'>
           <Carrousel>
@@ -56,6 +56,7 @@ const Home = ({ myList, trends, originals }) => {
 
 };
 
+//Devuelve los props que se desean utilizar en los componentes
 const mapStateToProps = (state) => {
   return {
     myList: state.myList,
