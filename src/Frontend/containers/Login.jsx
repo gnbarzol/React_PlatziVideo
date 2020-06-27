@@ -30,22 +30,32 @@ const Login = (props) => {
     <section className='login'>
       <section className='login__container'>
         <h2>Inicia sesión</h2>
-        <form className='login__container--form' onSubmit={handleSubmit} >
+        <form className='login__container--form' onSubmit={handleSubmit}>
           <input className='input' name='email' type='text' placeholder='Correo' onChange={handleInput} />
           <input className='input' name='pass' type='password' placeholder='Contraseña' onChange={handleInput} />
-          <button className='button' >Iniciar sesión</button>
+          <button className='button'>Iniciar sesión</button>
           <div className='login__container--remember-me'>
             <label>
-              <input type='checkbox' id='cbox1' value='first_checkbox' />Recuérdame
+              <input type='checkbox' id='cbox1' value='first_checkbox' />
+              Recuérdame
             </label>
             <a href='/'>Olvidé mi contraseña</a>
           </div>
         </form>
         <section className='login__container--social-media'>
-          <div><img src={googleIcon} /> Inicia sesión con Google</div>
-          <div><img src={twitterIcon} /> Inicia sesión con Twitter</div>
+          <div>
+            <img src={googleIcon} alt='logo google' />
+            {' '}
+            Inicia sesión con Google
+          </div>
+          <div>
+            <img src={twitterIcon} alt='logo twitter' />
+            {' '}
+            Inicia sesión con Twitter
+          </div>
         </section>
-        <p className='login__container--register'>No tienes ninguna cuenta
+        <p className='login__container--register'>
+          No tienes ninguna cuenta
           <Link to='/register'>Regístrate</Link>
         </p>
       </section>
@@ -55,6 +65,6 @@ const Login = (props) => {
 
 const mapDispathToProps = {
   loginRequest,
-}
+};
 
 export default connect(null, mapDispathToProps)(Login);
