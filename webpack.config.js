@@ -3,13 +3,25 @@ const webpack = require('webpack');
 
 //Esto no se añade al comienzo
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
+
+const dotenv = require('dotenv');
+dotenv.config();
+
+const isDev = (process.env.ENV === 'development');
+const entry = ['./src/frontend/index.js'];
+
+if (isDev) entry.push('webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true')
+
 
 module.exports = {
-  entry: ['./src/Frontend/index.js', 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=2000&reload=true'],
-  mode: 'development',
+  mode: isDev ? 'development' : 'production',
+  entry,
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'assets/app.js',
+    path: isDev ? '/' : path.resolve(__dirname, 'src/server/public'),
+    filename: isDev ? 'assets/app.js' : 'assets/app-[hash].js',
+    "publicPath": '/',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -60,10 +72,15 @@ module.exports = {
     historyApiFallback: true,
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(), //Nos va a permiter hacer cambios en caliente
-    // Esto no se añade al comienzo
+    isDev ? new webpack.HotModuleReplacementPlugin() : () => { },
     new MiniCssExtractPlugin({
-      filename: 'assets/app.css',
+      filename: isDev ? 'assets/app.css' : 'assets/app-[hash].css',
     }),
+    isDev ? () => { } :
+      new CompressionPlugin({
+        test: /\.js$|\.css$/,
+        filename: '[path].gz',
+      }),
+    isDev ? () => { } : new ManifestPlugin(),
   ],
 };
