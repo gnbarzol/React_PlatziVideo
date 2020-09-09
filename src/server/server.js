@@ -103,46 +103,46 @@ const renderApp = (req, res) => {
   res.send(setResponse(html, preloadedState, req.hashManifest));
 }
 
-app.post("/auth/sign-in", async function (req, res, next) {
-  const { rememberMe } = req.body;
+// app.post("/auth/sign-in", async function (req, res, next) {
+//   const { rememberMe } = req.body;
 
-  passport.authenticate("basic", function (error, data) {
-    try {
-      if (error || !data) {
-        next(boom.unauthorized());
-      }
+//   passport.authenticate("basic", function (error, data) {
+//     try {
+//       if (error || !data) {
+//         next(boom.unauthorized());
+//       }
 
-      req.login(data, { session: false }, async function (error) {
-        if (error) {
-          next(error);
-        }
-        const { token, ...user } = data;
+//       req.login(data, { session: false }, async function (error) {
+//         if (error) {
+//           next(error);
+//         }
+//         const { token, ...user } = data;
 
-        res.cookie("token", token, {
-          httpOnly: !config.dev,
-          secure: !config.dev,
-          maxAge: rememberMe ? TRIRTY_DAYS_IN_SEC : TWO_HOURS_IN_SEC
-        });
+//         res.cookie("token", token, {
+//           httpOnly: !config.dev,
+//           secure: !config.dev,
+//           maxAge: rememberMe ? TRIRTY_DAYS_IN_SEC : TWO_HOURS_IN_SEC
+//         });
 
-        res.status(200).json(user);
-      });
-    } catch (error) {
-      next(error);
-    }
-  })(req, res, next);
-});
+//         res.status(200).json(user);
+//       });
+//     } catch (error) {
+//       next(error);
+//     }
+//   })(req, res, next);
+// });
 
 app.post("/auth/sign-up", async function (req, res, next) {
   const { body: user } = req;
 
   try {
-    const { status } = await axios({
-      url: `${config.apiUrl}/api/auth/sign-up`,
+    const { status, ...rest } = await axios({
+      url: `${process.env.API_URL}/api/auth/sign-up`,
       method: "post",
       data: user,
     });
 
-    status === 201 ? res.status(201).json({ message: "user created" }) : res.status(202).json({ message: "user already exists" })
+    status === 201 ? res.status(201).json({ name: user.name, email: user.email, id: rest.data.id }) : res.status(202).json({ message: "user already exists" })
   } catch (error) {
     next(error);
   }
